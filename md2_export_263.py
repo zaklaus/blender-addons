@@ -16,6 +16,11 @@
 
 # ***** END GPL LICENCE BLOCK *****
 
+#
+# This source code was modified to better support Quake 2. While straight export to MD2 won't work in the game engine itself, it proves as a good starting point of getting the
+# model to the game. Use tools such as Quake Model Editor to finalize the conversion, apply skins, frame names and such.
+#
+
 bl_info = {
     "name": "Export .md2",
     "description": "Export to Quake2 file format, applies modifiers (.md2)",
@@ -225,7 +230,7 @@ class MD2:
 		self.version = 8
 
 		self.skinwidth = 2**10-1 #1023
-		self.skinheight = 2**10-1 #1023
+		self.skinheight = 480 #1023
 
 		# self.framesize : see below
 
@@ -429,8 +434,8 @@ class MD2:
 		mesh = self.object.to_mesh(bpy.context.scene, True, 'PREVIEW')
 		
 		mesh.transform(self.object.matrix_world)
-		mesh.transform(mathutils.Matrix.Rotation(pi/2, 4, 'X')) 
-		mesh.transform(mathutils.Matrix.Rotation(pi, 4, 'Z')) 
+		#mesh.transform(mathutils.Matrix.Rotation(pi/2, 4, 'X')) 
+		mesh.transform(mathutils.Matrix.Rotation(pi/2, 4, 'Z')) 
 
 		###### compute the bounding box ###############
 		min = [mesh.vertices[0].co[0],
@@ -659,8 +664,8 @@ class Export_MD2(bpy.types.Operator, ExportHelper):
 	filename_ext = ".md2"
 
 	rScaleFactor = FloatProperty(name="Scale for blenderUnits -> [mm]",
-								 description="Defaults to 1000 (blender unit -> [mm])",
-								 default=1000.0)
+								 description="Defaults to 10 (blender unit -> [mm])",
+								 default=10.0)
 
 	fExportAnimation = BoolProperty(name="Export animation",
 							description="default: False",
