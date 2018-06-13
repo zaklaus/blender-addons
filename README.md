@@ -1,4 +1,4 @@
-# Addons for Blender 2.5 and 2.6
+# Addons for Blender 2.6
 
 This repository contains exporter and tools for 3D the modeling tool [Blender](http://blender.org).
 
